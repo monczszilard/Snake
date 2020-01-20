@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Snake.ViewModels
+namespace SnakeApp.ViewModels
 {
-    public class BackgroundRectagleViewModel
+    public class BackgroundRectangleViewModel
     {
         public Point Position { get; set; }
         public Color Color { get; set; }
+        public Brush Brush => new SolidColorBrush(this.Color);
         public Size Size { get; set; }
     }
 }

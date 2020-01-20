@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Snake
+namespace SnakeApp
 {
     public class Game
     {

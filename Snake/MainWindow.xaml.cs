@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnakeApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Snake
+namespace SnakeApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +24,9 @@ namespace Snake
         public MainWindow()
         {
             InitializeComponent();
+
+            Game game = new Game(new Size(20,20), 0);
+            this.DataContext = new GameViewModel(game);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 
 
-namespace Snake
+namespace SnakeApp
 {
     public class SnakePart
     {

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
-namespace Snake.ViewModels
+namespace SnakeApp.ViewModels
 {
     public class GameViewModel
     {
@@ -14,7 +15,8 @@ namespace Snake.ViewModels
         public GameViewModel(Game game)
         {
             this.Game = game;
-            this.BackgroundRectangleViewModels = new BackgroundRectagleViewModel[((int)(game.BoardSize.Height * game.BoardSize.Width))];
+            this.BackgroundRectangleViewModels = new BackgroundRectangleViewModel[((int)(game.BoardSize.Height * game.BoardSize.Width))];
+            GenerateBackGround();
         }
 
         private void GenerateBackGround()
@@ -24,12 +26,12 @@ namespace Snake.ViewModels
                 for (int column = 0; column < this.Game.BoardSize.Width; column++)
                 {
                     this.BackgroundRectangleViewModels[column + row * (int)this.Game.BoardSize.Width] =
-                        new BackgroundRectagleViewModel() { Position = new Point(row, column) };
+                        new BackgroundRectangleViewModel() { Position = new Point(row, column), Color = Colors.Black };
                 }
             }
         } 
 
-        BackgroundRectagleViewModel[] BackgroundRectangleViewModels { get; set; }
+        public BackgroundRectangleViewModel[] BackgroundRectangleViewModels { get; set; }
 
     }
 }
