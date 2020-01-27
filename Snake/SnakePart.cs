@@ -14,5 +14,10 @@ namespace SnakeApp
         public Point Position { get; set; }
 
         public virtual Color Color { get; set; }
+
+        public SnakePart(Point position)
+        {
+            this.Position = position;
+        }
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="SnakeHead.cs" />
     <Compile Include="SnakePart.cs" />
     <Compile Include="ViewModels\BackgroundRectangleViewModel.cs" />
+    <Compile Include="ViewModels\SnakePartViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

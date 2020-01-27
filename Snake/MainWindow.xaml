@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SnakeApp"
+        xmlns:local="clr-namespace:SnakeApp"        
+        xmlns:vm="clr-namespace:SnakeApp.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:BackgroundRectangleViewModel}">
+            <Rectangle Width="20" Height="20" Fill="{Binding Brush}" />
+        </DataTemplate>
+    </Window.Resources>
     <ItemsControl ItemsSource="{Binding BackgroundRectangleViewModels}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
@@ -18,10 +24,5 @@
                 <Setter Property="Canvas.Top" Value="{Binding Position.Y}" />
             </Style>
         </ItemsControl.ItemContainerStyle>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="X:Type BackgroundRectangleViewModel">
-                <Rectangle Width="20" Height="20" Fill="{Binding Brush}" />
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
     </ItemsControl>
 </Window>
