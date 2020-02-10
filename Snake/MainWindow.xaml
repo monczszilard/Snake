@@ -9,7 +9,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:BackgroundRectangleViewModel}">
-            <Rectangle Width="20" Height="20" Fill="{Binding Brush}" />
+            <Rectangle Width="{Binding SquareSize}" Height="{Binding SquareSize}" Fill="{Binding Brush}" />
         </DataTemplate>
     </Window.Resources>
     <ItemsControl ItemsSource="{Binding BackgroundRectangleViewModels}">

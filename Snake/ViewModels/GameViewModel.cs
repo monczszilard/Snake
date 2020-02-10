@@ -13,6 +13,7 @@ namespace SnakeApp.ViewModels
     public class GameViewModel
     {
         Game Game { get; }
+        public static int SquareSize { get; set; } = 50;
 
         public GameViewModel(Game game)
         {

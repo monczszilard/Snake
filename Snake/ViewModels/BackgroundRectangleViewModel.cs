@@ -10,9 +10,22 @@ namespace SnakeApp.ViewModels
 {
     public class BackgroundRectangleViewModel
     {
-        public Point Position { get; set; }
+        private Point position;
+        public Point Position
+        {
+            get
+            {
+                return new Point(position.X * GameViewModel.SquareSize, position.Y * GameViewModel.SquareSize);
+            }
+
+            set
+            {
+                this.position = value;
+            }
+        }
         public Color Color { get; set; }
         public Brush Brush => new SolidColorBrush(this.Color);
         public Size Size { get; set; }
+        public static int SquareSize { get => GameViewModel.SquareSize; }
     }
 }

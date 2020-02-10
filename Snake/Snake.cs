@@ -9,6 +9,12 @@ namespace SnakeApp
 {
     public class Snake
     {
+
+        public Snake(int size, Point startPosition)
+        {
+            this.GenerateSnake(size, startPosition);
+        }
+
         public List<SnakePart> SnakeParts { get; set; }
 
         public void Move(Direction direction)
@@ -21,9 +27,10 @@ namespace SnakeApp
             }
         }
 
+
         public void GenerateSnake(int size, Point startPosition)
         {
-
+            this.SnakeParts = new List<SnakePart>(size);
             for (int i = 0; i < size; i++)
             {
                 Point position = new Point(startPosition.X + i, startPosition.Y);
