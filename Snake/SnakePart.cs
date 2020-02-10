@@ -13,7 +13,7 @@ namespace SnakeApp
     {
         public Point Position { get; set; }
 
-        public virtual Color Color { get; set; }
+        public virtual Color Color { get; set; } = Colors.Aquamarine;
 
         public SnakePart(Point position)
         {

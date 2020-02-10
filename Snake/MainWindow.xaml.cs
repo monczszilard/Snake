@@ -27,6 +27,7 @@ namespace SnakeApp
 
             Game game = new Game(new Size(20,20), 0);
             this.DataContext = new GameViewModel(game);
+            game.GenerateSnake();
         }
     }
 }

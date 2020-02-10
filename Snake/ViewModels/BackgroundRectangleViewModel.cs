@@ -15,7 +15,7 @@ namespace SnakeApp.ViewModels
         {
             get
             {
-                return new Point(position.X * GameViewModel.SquareSize, position.Y * GameViewModel.SquareSize);
+                return new Point(position.X * BackgroundRectangleViewModel.SquareSize, position.Y * BackgroundRectangleViewModel.SquareSize);
             }
 
             set

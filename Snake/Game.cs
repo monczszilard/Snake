@@ -20,8 +20,8 @@ namespace SnakeApp
 
             // initial food count
             FoodCount = (int)(BoardSize.Height * BoardSize.Width * 0.15) + 1;
-
-            this.GenerateSnake();
+            this.Snake = new Snake();
+            //this.GenerateSnake();
         }
 
         public int FoodCount { get; set; }
@@ -43,9 +43,8 @@ namespace SnakeApp
 
         public void GenerateSnake()
         {
-            const int startSize = 3;
             Point startPoint = new Point(this.BoardSize.Width / 2d - initialSnakeSize / 2d, this.BoardSize.Height / 2);
-            this.Snake = new Snake(startSize, startPoint);
+            this.Snake.GenerateSnake(initialSnakeSize, startPoint);
         }
     }
 }

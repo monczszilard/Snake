@@ -11,8 +11,11 @@
         <DataTemplate DataType="{x:Type vm:BackgroundRectangleViewModel}">
             <Rectangle Width="{Binding SquareSize}" Height="{Binding SquareSize}" Fill="{Binding Brush}" />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SnakePartViewModel}">
+            <Rectangle Width="{Binding SquareSize}" Height="{Binding SquareSize}" Fill="{Binding Brush}" />
+        </DataTemplate>
     </Window.Resources>
-    <ItemsControl ItemsSource="{Binding BackgroundRectangleViewModels}">
+    <ItemsControl ItemsSource="{Binding CompositeCollection}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <Canvas/>
