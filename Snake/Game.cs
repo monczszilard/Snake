@@ -43,7 +43,7 @@ namespace SnakeApp
 
         public void GenerateSnake()
         {
-            Point startPoint = new Point(this.BoardSize.Width / 2d - initialSnakeSize / 2d, this.BoardSize.Height / 2);
+            Point startPoint = new Point((double)(int)(this.BoardSize.Width / 2d - initialSnakeSize / 2d),(double)(int) this.BoardSize.Height / 2d);
             this.Snake.GenerateSnake(initialSnakeSize, startPoint);
         }
     }

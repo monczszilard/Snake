@@ -25,7 +25,7 @@ namespace SnakeApp
         {
             InitializeComponent();
 
-            Game game = new Game(new Size(20,20), 0);
+            Game game = new Game(new Size(21,21), 0);
             this.DataContext = new GameViewModel(game);
             game.GenerateSnake();
         }
