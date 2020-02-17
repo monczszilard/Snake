@@ -18,10 +18,10 @@ namespace SnakeApp
             Seed = seed;
             this.random = new Random(this.Seed);
 
-            // initial food count
+            /*initial food count*/
             FoodCount = (int)(BoardSize.Height * BoardSize.Width * 0.15) + 1;
             this.Snake = new Snake();
-            //this.GenerateSnake();
+            /*this.GenerateSnake();*/
         }
 
         public int FoodCount { get; set; }
@@ -43,7 +43,7 @@ namespace SnakeApp
 
         public void GenerateSnake()
         {
-            Point startPoint = new Point((double)(int)(this.BoardSize.Width / 2d - initialSnakeSize / 2d),(double)(int) this.BoardSize.Height / 2d);
+            Point startPoint = new Point((int)(this.BoardSize.Width / 2d - initialSnakeSize / 2d), (int) this.BoardSize.Height / 2);
             this.Snake.GenerateSnake(initialSnakeSize, startPoint);
         }
     }

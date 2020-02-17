@@ -15,7 +15,8 @@ namespace SnakeApp.ViewModels
     {
         Game Model { get; }
         public static int SquareSize { get; set; } = 40;
-        public int CanvasSize { get; set; } = 
+        public int CanvasWidth => (int)this.Model.BoardSize.Width * SquareSize;
+        public int CanvasHeight => (int)this.Model.BoardSize.Height * SquareSize;
 
         public GameViewModel(Game game)
         {
@@ -63,7 +64,7 @@ namespace SnakeApp.ViewModels
         }
 
         public ObservableCollection<object> CompositeCollection { get; set; }
-        //=> new ObservableCollection<object>(this.BackgroundRectangleViewModels.Concat(this.SnakePartViewModels.Cast<object>()));
+        /*=> new ObservableCollection<object>(this.BackgroundRectangleViewModels.Concat(this.SnakePartViewModels.Cast<object>()));*/
 
         public ObservableCollection<SnakePartViewModel> SnakePartViewModels { get; set; }
 

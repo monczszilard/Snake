@@ -24,14 +24,19 @@ namespace SnakeApp
             {
                 case Direction.Left:
                     break;
-
+                case Direction.Right:
+                    break;
+                case Direction.Up:
+                    break;
+                case Direction.Down:
+                    break;
             }
         }
 
 
         public void GenerateSnake(int size, Point startPosition)
         {
-            for (int i = 0; i < size; i++)
+            for (int i = size - 1; i >= 0; i--)
             {
                 Point position = new Point(startPosition.X + i, startPosition.Y);
                 SnakePart snakePart = i != size - 1 ? new SnakePart(position) : new SnakeHead(position);
