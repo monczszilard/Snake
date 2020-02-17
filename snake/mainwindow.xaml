@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SnakeApp"        
         xmlns:vm="clr-namespace:SnakeApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:BackgroundRectangleViewModel}">
             <Rectangle Width="{Binding SquareSize}" Height="{Binding SquareSize}" Fill="{Binding Brush}" />
@@ -18,7 +18,7 @@
     <ItemsControl ItemsSource="{Binding CompositeCollection}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <Canvas Height="{}" Width="{}"/>
+                <Canvas Height="{Binding CanvasHeight}" Width="{Binding CanvasWidth}"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemContainerStyle>
