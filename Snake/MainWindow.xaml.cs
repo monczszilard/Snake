@@ -26,5 +26,11 @@ namespace SnakeApp
             this.DataContext = new GameViewModel(game);
             game.GenerateSnake();
         }
+
+        private void KeyDownEventHandler(object sender, KeyEventArgs e)
+        {
+            (this.DataContext as GameViewModel)?.KeyDownEventHandler(e);
+        }
+
     }
 }

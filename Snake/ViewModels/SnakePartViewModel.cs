@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,33 +9,37 @@ using System.Windows.Media;
 
 namespace SnakeApp.ViewModels
 {
-    public class SnakePartViewModel
+    public class SnakePartViewModel : INotifyPropertyChanged
     {
-        public SnakePartViewModel(Point position, Size size, Color color)
+        public SnakePartViewModel(SnakePart model, Size size)
         {
-            this.Position = position;
             this.Size = size;
-            this.Color = color;
+            this.Model = model;
+
+            model.PropertyChanged += ModelPropertyChangedEventHandler;
         }
 
-        private Point position;
+        private void ModelPropertyChangedEventHandler(object sender, PropertyChangedEventArgs e)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public Point Position
         {
             get
             {
-                return new Point(position.X * GameViewModel.SquareSize, position.Y * GameViewModel.SquareSize);
+                return new Point(Model.Position.X * GameViewModel.SquareSize, Model.Position.Y * GameViewModel.SquareSize);
             }
 
-            set
-            {
-                this.position = value;
-            }
         }
 
-        public Color Color { get; set; }
+        public Color Color => this.Model.Color;
         public Brush Brush => new SolidColorBrush(this.Color);
         public Size Size { get; set; }
 
         public static int SquareSize { get => GameViewModel.SquareSize; }
+        public SnakePart Model { get; }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SnakeApp"        
         xmlns:vm="clr-namespace:SnakeApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="MainWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" KeyDown="KeyDownEventHandler">
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:BackgroundRectangleViewModel}">
             <Rectangle Width="{Binding SquareSize}" Height="{Binding SquareSize}" Fill="{Binding Brush}" />
