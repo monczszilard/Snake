@@ -5,12 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace SnakeApp
 {
     public class Game
     {
         const int initialSnakeSize = 3;
+        double gameTick = 150;
+        private DispatcherTimer timer;
+
 
         public Game(Size boardSize, int seed)
         {
@@ -22,6 +26,11 @@ namespace SnakeApp
             FoodCount = (int)(BoardSize.Height * BoardSize.Width * 0.15) + 1;
             this.Snake = new Snake();
             /*this.GenerateSnake();*/
+
+            timer = new DispatcherTimer(DispatcherPriority.Send);
+            timer.Tick += OnTick;
+            timer.Interval = TimeSpan.FromMilliseconds(gameTick);
+            timer.Start();
         }
 
         public int FoodCount { get; set; }
@@ -39,6 +48,38 @@ namespace SnakeApp
         public void GenerateFood()
         {
 
+        }
+
+        private void OnTick(object sender, EventArgs e)
+        {
+            this.Snake.Move();
+            CheckCollision();
+        }
+
+        private void CheckCollision()
+        {
+            if (Snake.SnakeParts[0].Position.X < 0 || Snake.SnakeParts[0].Position.Y < 0 || Snake.SnakeParts[0].Position.X >= this.BoardSize.Height || Snake.SnakeParts[0].Position.X >= this.BoardSize.Width || HitSelf())
+            {
+                resetGame();
+            }
+        }
+        
+        private bool HitSelf()
+        {
+            foreach(SnakePart sp in this.Snake.SnakeParts.Skip(3))
+            {
+                if(sp.Position.X == this.Snake.SnakeParts[0].Position.X && sp.Position.Y == this.Snake.SnakeParts[0].Position.Y)
+                {
+                    return true;
+                }                
+            }
+            return false;
+        }
+
+        private void resetGame()
+        {
+            this.Snake = new Snake();
+            this.GenerateSnake();
         }
 
         public void GenerateSnake()
