@@ -18,13 +18,24 @@ namespace SnakeApp
 {
     public partial class MainWindow : Window
     {
+        private Game game;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.Game_NewGameInitialized(null, EventArgs.Empty);
+        }
 
-            Game game = new Game(new Size(21,21), 0);
+        private void Game_NewGameInitialized(object sender, EventArgs e)
+        {
+            if (this.game != null)
+            {
+                this.game.NewGameInitialized -= Game_NewGameInitialized;
+            }
+            this.game = new Game(new Size(21, 21), 0);
             this.DataContext = new GameViewModel(game);
             game.GenerateSnake();
+            game.NewGameInitialized += Game_NewGameInitialized;
         }
 
         private void KeyDownEventHandler(object sender, KeyEventArgs e)

@@ -22,19 +22,16 @@ namespace SnakeApp
             Seed = seed;
             this.random = new Random(this.Seed);
 
-            /*initial food count*/
-            FoodCount = (int)(BoardSize.Height * BoardSize.Width * 0.15) + 1;
-            this.Snake = new Snake();
-            /*this.GenerateSnake();*/
 
+            this.Snake = new Snake();
+            GenerateFood();
+            
             timer = new DispatcherTimer(DispatcherPriority.Send);
             timer.Tick += OnTick;
             timer.Interval = TimeSpan.FromMilliseconds(gameTick);
             timer.Start();
         }
-
-        public int FoodCount { get; set; }
-
+       
         public Size BoardSize { get; set; }
         private int Seed { get; }
 
@@ -58,9 +55,9 @@ namespace SnakeApp
 
         private void CheckCollision()
         {
-            if (Snake.SnakeParts[0].Position.X < 0 || Snake.SnakeParts[0].Position.Y < 0 || Snake.SnakeParts[0].Position.X >= this.BoardSize.Height || Snake.SnakeParts[0].Position.X >= this.BoardSize.Width || HitSelf())
+            if (Snake.SnakeParts[0].Position.X < 0 || Snake.SnakeParts[0].Position.Y < 0 || Snake.SnakeParts[0].Position.Y >= this.BoardSize.Height || Snake.SnakeParts[0].Position.X >= this.BoardSize.Width || HitSelf())
             {
-                resetGame();
+                ResetGame();
             }
         }
         
@@ -76,10 +73,11 @@ namespace SnakeApp
             return false;
         }
 
-        private void resetGame()
+        public event EventHandler NewGameInitialized;
+
+        private void ResetGame()
         {
-            this.Snake = new Snake();
-            this.GenerateSnake();
+            this.NewGameInitialized?.Invoke(this, EventArgs.Empty);
         }
 
         public void GenerateSnake()

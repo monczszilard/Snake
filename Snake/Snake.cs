@@ -14,6 +14,8 @@ namespace SnakeApp
         public Snake()
         {
             this.SnakeParts = new ObservableCollection<SnakePart>();
+            this.OldDirection = Direction.Right;
+            this.NewDirection = Direction.Right;
         }
 
         public ObservableCollection<SnakePart> SnakeParts { get; set; }

@@ -23,11 +23,11 @@ namespace SnakeApp.ViewModels
         {
             switch(e.Key)
             {
-                case Key.D:
+                case Key.A:
                 case Key.Left:
                     this.Model.Snake.NewDirection = Direction.Left;
                     break;
-                case Key.A:
+                case Key.D:
                 case Key.Right:
                     this.Model.Snake.NewDirection = Direction.Right;
                     break;
@@ -51,8 +51,12 @@ namespace SnakeApp.ViewModels
             this.BackgroundRectangleViewModels = new BackgroundRectangleViewModel[((int)(game.BoardSize.Height * game.BoardSize.Width))];
             this.SnakePartViewModels = new ObservableCollection<SnakePartViewModel>();
             GenerateBackGround();
+            InitializeSnake();
+        }
+
+        public void InitializeSnake()
+        {
             this.Model.Snake.SnakeParts.CollectionChanged += SnakeParts_CollectionChanged;
-            GenerateSnake();
         }
 
         private void SnakeParts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -78,14 +82,6 @@ namespace SnakeApp.ViewModels
                     CompositeCollection.Add(this.BackgroundRectangleViewModels[column + row * (int)this.Model.BoardSize.Width]);
 
                 }
-            }
-        }
-
-        private void GenerateSnake()
-        {
-            foreach (SnakePart snakePart in this.Model.Snake.SnakeParts)
-            {
-
             }
         }
 
