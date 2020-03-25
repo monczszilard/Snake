@@ -16,9 +16,11 @@ namespace SnakeApp
             this.SnakeParts = new ObservableCollection<SnakePart>();
             this.OldDirection = Direction.Right;
             this.NewDirection = Direction.Right;
+            this.Fed = false;
         }
 
-        public ObservableCollection<SnakePart> SnakeParts { get; set; }
+        public ObservableCollection<SnakePart> SnakeParts { get; set; } //from head to tail
+        private bool Fed {get; set;}
 
         public Direction OldDirection { get; set; }
 
@@ -85,6 +87,10 @@ namespace SnakeApp
 
         private void ChangePosition(int dx, int dy)
         {
+            if(Fed){ 
+                Fed = false;
+                this.SnakeParts.Add(new SnakePart(new Point(-1,-1))); //add a snakePart to the end of snake, the position will be correctly asigned below
+            }
             this.SnakeParts[SnakeParts.Count - 1].Position = new Point(this.SnakeParts[0].Position.X, this.SnakeParts[0].Position.Y);
             this.SnakeParts.Move(SnakeParts.Count - 1, 1);
             this.SnakeParts[0].Position = new Point(this.SnakeParts[0].Position.X + dx, this.SnakeParts[0].Position.Y + dy);
@@ -98,6 +104,10 @@ namespace SnakeApp
                 SnakePart snakePart = i != size - 1 ? new SnakePart(position) : new SnakeHead(position);
                 this.SnakeParts.Add(snakePart);
             }
+        }
+
+        public void Feed(){
+            this.Fed = true;
         }
     }
 }
