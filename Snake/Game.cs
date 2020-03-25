@@ -24,6 +24,9 @@ namespace SnakeApp
 
 
             this.Snake = new Snake();
+            this.MapOfFoodGenerationSpots = new bool [(int)(this.BoardSize.Width) * (int)(this.BoardSize.Height)];
+            this.Food = new Food(new Point(-1,-1));
+
             GenerateFood();
             
             timer = new DispatcherTimer(DispatcherPriority.Send);
@@ -35,16 +38,46 @@ namespace SnakeApp
         public Size BoardSize { get; set; }
         private int Seed { get; }
 
-        private Random random;
+        public Random random;
 
         public int Score { get; set; }
 
         public Snake Snake { get; set; }
-        public List<Point> FoodPositions { get; set; }
+        public Food Food { get; set; }
+
+        private bool [] MapOfFoodGenerationSpots {get; set;}
+
+        /*
+         * The mapping is:
+         *      point [x,y] => map[x + y*width]
+         *      
+         *      map[i] => point.X = i % width;
+         *                point.Y = i / width;
+         *      
+         */
 
         public void GenerateFood()
         {
+            for(int i = 0; i < MapOfFoodGenerationSpots.Length; i++){ //reset values => everywhere true
+                MapOfFoodGenerationSpots[i] = true;
+            }
 
+            foreach(SnakePart sp in this.Snake.SnakeParts){ //set places where is currently snake to false
+                MapOfFoodGenerationSpots[(int)(sp.Position.X) + (int)(this.BoardSize.Width)*(int)(sp.Position.Y)] = false;
+            }
+
+            int randomInt = this.random.Next(0, this.MapOfFoodGenerationSpots.Length - this.Snake.SnakeParts.Count - 1);
+
+            int pointerInMap = 0;
+
+            while(randomInt > 0){
+                if(MapOfFoodGenerationSpots[pointerInMap]){
+                    randomInt--;
+                }
+                pointerInMap++;
+            }
+
+            Food.Position = new Point(pointerInMap % (int)(this.BoardSize.Width), pointerInMap / (int)(this.BoardSize.Width));
         }
 
         private void OnTick(object sender, EventArgs e)
@@ -58,6 +91,12 @@ namespace SnakeApp
             if (Snake.SnakeParts[0].Position.X < 0 || Snake.SnakeParts[0].Position.Y < 0 || Snake.SnakeParts[0].Position.Y >= this.BoardSize.Height || Snake.SnakeParts[0].Position.X >= this.BoardSize.Width || HitSelf())
             {
                 ResetGame();
+            }
+
+            if((this.Snake.SnakeParts[0].Position.X == this.Food.Position.X) && (this.Snake.SnakeParts[0].Position.Y == this.Food.Position.Y)){
+                Score++;
+                this.Snake.Feed();
+                GenerateFood();
             }
         }
         

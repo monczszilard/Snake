@@ -20,9 +20,12 @@ namespace SnakeApp
     {
         private Game game;
 
+        int Seed {get; set;}
+
         public MainWindow()
         {
             InitializeComponent();
+            Seed = 0;
             this.Game_NewGameInitialized(null, EventArgs.Empty);
         }
 
@@ -30,9 +33,10 @@ namespace SnakeApp
         {
             if (this.game != null)
             {
+                Seed = this.game.random.Next();
                 this.game.NewGameInitialized -= Game_NewGameInitialized;
             }
-            this.game = new Game(new Size(21, 21), 0);
+            this.game = new Game(new Size(21, 21), Seed);
             this.DataContext = new GameViewModel(game);
             game.GenerateSnake();
             game.NewGameInitialized += Game_NewGameInitialized;

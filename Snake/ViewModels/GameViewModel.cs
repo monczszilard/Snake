@@ -51,7 +51,9 @@ namespace SnakeApp.ViewModels
             this.BackgroundRectangleViewModels = new BackgroundRectangleViewModel[((int)(game.BoardSize.Height * game.BoardSize.Width))];
             this.SnakePartViewModels = new ObservableCollection<SnakePartViewModel>();
             GenerateBackGround();
+            this.CompositeCollection.Add(new FoodViewModel(this.Model.Food, new Size(SquareSize, SquareSize)));
             InitializeSnake();
+            
         }
 
         public void InitializeSnake()
