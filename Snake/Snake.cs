@@ -10,7 +10,6 @@ namespace SnakeApp
 {
     public class Snake
     {
-
         public Snake()
         {
             this.SnakeParts = new ObservableCollection<SnakePart>();
@@ -85,6 +84,11 @@ namespace SnakeApp
             this.OldDirection = this.NewDirection;
         }
 
+        /// <summary>
+        /// Moves the snake by the relative position <paramref name="dx"/>, <paramref name="dy"/>.
+        /// </summary>
+        /// <param name="dx">The relative distance dx.</param>
+        /// <param name="dy">The relative distance dy.</param>
         private void ChangePosition(int dx, int dy)
         {
             if(Fed){ 
