@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 
 namespace SnakeApp
 {
-    public class SnakeHead : SnakePart
+    public class Food : SnakePart
     {
-        public SnakeHead(Point position) : base(position)
+        public Food(Point position) : base(position)
         {
 
         }
 
-        public override Color Color { get; set; } = Colors.Red;
+
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Snake
+﻿namespace SnakeApp
 {
     public enum Direction
     {
